@@ -12,6 +12,8 @@
             --text-color: #333;
             --time-red-bg: #ffebee;
             --time-red-text: #d32f2f;
+            --starlux-gold: #b59a5a; /* 星宇航空金色 */
+            --vjw-blue: #3498db; /* VJW 藍色 */
         }
         html { scroll-behavior: smooth; }
         body {
@@ -61,7 +63,6 @@
             padding: 20px 15px;
         }
         
-        /* 區塊樣式 */
         .info-card {
             border-radius: 12px;
             padding: 20px;
@@ -72,9 +73,9 @@
         }
         .info-card h3 { margin-top: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
         .info-hotel { border-left-color: #f39c12; }
-        .info-flight { border-left-color: #3498db; }
+        .info-flight { border-left-color: var(--starlux-gold); }
         .info-ticket { border-left-color: #2ecc71; }
-        .info-vjw { border-left-color: #e74c3c; } /* Visit Japan Web 獨立色系 */
+        .info-vjw { border-left-color: var(--vjw-blue); }
         
         .btn-link {
             display: block;
@@ -149,7 +150,6 @@
             border-left: 2px solid #eee;
         }
 
-        /* 逛街獨立區塊 */
         .shopping-block {
             background: #fff9db;
             padding: 15px;
@@ -201,12 +201,12 @@
     <h2 id="info" style="font-size: 1.2rem; border-left: 5px solid #2c3e50; padding-left: 10px;">行前必備</h2>
     
     <div class="info-card info-flight">
-        <h3>✈️ 班機資訊 (星宇航空)</h3>
+        <h3 style="color: var(--starlux-gold);">✈️ 班機資訊 (星宇航空)</h3>
         <p style="font-size: 0.95rem; color: #333; line-height: 2;">
             <strong>去程：05/19 (二)</strong><br>
-            航班: JX834 06:50 桃園(T1) → 10:30 神戶 (T2)<br>
+            航班: JX834  |  06:50 桃園(T1) → 10:30 神戶 (T2)<br>
             <strong>回程：05/24 (日)</strong><br>
-            航班: JX835 11:40 神戶(T2) → 13:40 桃園 (T1)
+            航班: JX835  |  11:40 神戶(T2) → 13:40 桃園 (T1)
         </p>
     </div>
 
@@ -226,9 +226,9 @@
     </div>
 
     <div class="info-card info-vjw">
-        <h3>📲 Visit Japan Web</h3>
+        <h3 style="color: var(--vjw-blue);">📲 Visit Japan Web</h3>
         <p style="font-size: 0.9rem; color: #666;">入境日本通關 QR Code，請事先填寫並截圖。</p>
-        <a href="https://www.vjw.digital.go.jp/" class="btn-link" target="_blank" style="background: #e74c3c;">前往 VJW 官網登入</a>
+        <a href="https://www.vjw.digital.go.jp/" class="btn-link" target="_blank" style="background: var(--vjw-blue);">前往 Visit Japan Web 官網登入</a>
     </div>
 
     <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
@@ -304,9 +304,15 @@
                 <span class="transport-tag">🚗 車程/步行 (8min)</span>
             </div>
             <div class="details">預計從奈良公園前往</div>
+        </div>
+        <div class="schedule-item">
+            <div class="time-loc-trans">
+                <span class="time">下午</span>
+                <span class="location">心齋橋地區</span>
+                <span class="transport-tag">🚗 車程 (1h)</span>
+            </div>
             <div class="shopping-block">
                 <strong>🛍️ 逛街行程</strong>
-                車程 1h 前往心齋橋地區：<br>
                 道頓堀、心齋橋、寶可夢中心大阪店 DX
             </div>
         </div>
@@ -356,6 +362,13 @@
             <div class="shopping-block">
                 <strong>🛍️ 逛街行程</strong>
                 LaLaport EXPOCITY 購物
+            </div>
+        </div>
+        <div class="schedule-item">
+            <div class="time-loc-trans">
+                <span class="time">17:30</span>
+                <span class="location">搭車回飯店</span>
+                <span class="transport-tag">🚗 車程 (1h)</span>
             </div>
         </div>
     </div>
