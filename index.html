@@ -24,33 +24,39 @@
         }
         header {
             background-color: var(--secondary-bg);
-            padding: 1rem;
+            padding: 1.2rem;
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid #eee;
         }
+        /* 修正導航列破裂問題 */
         nav {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start; /* 改為靠左對齊以便捲動 */
             gap: 10px;
             background: #fff;
-            padding: 10px;
+            padding: 12px 15px;
             overflow-x: auto;
             border-bottom: 1px solid #eee;
             position: sticky;
-            top: 57px;
+            top: 61px; /* 根據 header 高度調整 */
             z-index: 999;
+            -webkit-overflow-scrolling: touch;
         }
+        /* 隱藏捲軸但保留功能 */
+        nav::-webkit-scrollbar { display: none; }
+        
         nav a {
             color: var(--text-color);
             text-decoration: none;
             font-size: 0.85rem;
-            padding: 6px 12px;
+            padding: 8px 16px;
             border-radius: 20px;
             background: #f1f3f5;
             white-space: nowrap;
+            flex-shrink: 0; /* 防止按鈕被擠壓 */
         }
         .container {
             max-width: 800px;
@@ -58,7 +64,6 @@
             padding: 20px 15px;
         }
         
-        /* 行前資訊卡片樣式 */
         .info-card {
             border-radius: 12px;
             padding: 20px;
@@ -145,7 +150,6 @@
             border-left: 2px solid #eee;
         }
 
-        /* 逛街獨立區塊樣式 */
         .shopping-block {
             background: #fff9db;
             padding: 12px 15px;
@@ -155,7 +159,7 @@
             font-size: 0.95rem;
         }
 
-        /* 回到最上方按鈕 */
+        /* 修正回到最上方按鈕：改為使用 JavaScript 控制確保跳轉 */
         #backToTop {
             position: fixed;
             bottom: 25px;
@@ -169,29 +173,27 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            text-decoration: none;
-            color: #333;
-            font-size: 20px;
-            z-index: 1001;
+            cursor: pointer;
+            z-index: 2000;
         }
-
-        footer { text-align: center; padding: 20px; color: #95a5a6; font-size: 0.85rem; }
     </style>
 </head>
 <body>
 
-<header id="top">
-    <div style="font-weight: bold;">2026 KOBE TRAVEL</div>
+<div id="top-anchor"></div>
+
+<header>
+    <div style="font-weight: bold; font-size: 1.2rem;">2026 神戶之旅 KOBE TRAVEL</div>
 </header>
 
 <nav>
     <a href="#info">ℹ️ 行前資訊</a>
-    <a href="#day1">D1 5/19</a>
-    <a href="#day2">D2 5/20</a>
-    <a href="#day3">D3 5/21</a>
-    <a href="#day4">D4 5/22</a>
-    <a href="#day5">D5 5/23</a>
-    <a href="#day6">D6 5/24</a>
+    <a href="#day1">Day 1  5/19 (二)</a>
+    <a href="#day2">Day 2  5/20 (三)</a>
+    <a href="#day3">Day 3  5/21 (四)</a>
+    <a href="#day4">Day 4  5/22 (五)</a>
+    <a href="#day5">Day 5  5/23 (六)</a>
+    <a href="#day6">Day 6  5/24 (日)</a>
 </nav>
 
 <div class="container">
@@ -200,14 +202,16 @@
     
     <div class="info-card info-flight">
         <h3>✈️ 班機資訊 (星宇航空)</h3>
-        <p style="font-size: 0.9rem; color: #666;">去程：05/19 06:50 桃園(T1) → 10:30 神戶<br>回程：05/24 11:40 神戶 → 13:40 桃園</p>
-        <a href="https://www.starlux-airlines.com/" class="btn-link" target="_blank">前往星宇官網登入</a>
+        <p style="font-size: 0.95rem; color: #333; line-height: 1.8;">
+            去程：05/19 (二) 航班: JX834 06:50 桃園(T1) → 10:30 神戶 (T2)<br>
+            回程：05/24 (日) 航班: JX835 11:40 神戶(T2) → 13:40 桃園 (T1)
+        </p>
     </div>
 
     <div class="info-card info-hotel">
         <h3>🏨 remm plus Kobe Sannomiya</h3>
         <p style="font-size: 0.9rem; color: #666;">神戶三宮站直結，交通極便利</p>
-        <a href="https://maps.app.goo.gl/3XmXw5uE8X3X3X3X8" class="btn-link" target="_blank">導航至飯店</a>
+        <a href="http://maps.google.com/?q=remm+plus+Kobe+Sannomiya" class="btn-link" target="_blank">導航至飯店</a>
     </div>
 
     <div class="info-card info-ticket">
@@ -223,14 +227,14 @@
     <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
 
     <div class="day-section" id="day1">
-        <div class="day-header">Day 1_5/19 (二) | 抵達神戶</div>
+        <div class="day-header">Day 1  5/19 (二) | 抵達神戶</div>
         <div class="schedule-item">
             <div class="time-loc-trans">
                 <span class="time">05:00</span>
                 <span class="location">桃園機場一航集合</span>
                 <span class="transport-tag">🚕 計程車 (30min)</span>
             </div>
-            <div class="details">準備 Visit Japan Web、提早預約計程車</div>
+            <div class="details">準備 Visit Japan Web、提早預約計程車 [cite: 1]</div>
         </div>
         <div class="schedule-item">
             <div class="time-loc-trans">
@@ -238,7 +242,7 @@
                 <span class="location">神戶機場</span>
                 <span class="transport-tag">✈️ 星宇航空 (2h 40min)</span>
             </div>
-            <div class="details">06:50 桃園出發 -> 10:30 抵達</div>
+            <div class="details">06:50 桃園出發 -> 10:30 抵達 [cite: 1]</div>
         </div>
         <div class="schedule-item">
             <div class="time-loc-trans">
@@ -246,7 +250,7 @@
                 <span class="location">三宮站 / remm plus Kobe</span>
                 <span class="transport-tag">🚃 Port Liner (20min) <span class="price-in-tag">(340円)</span></span>
             </div>
-            <div class="details">【買神戶Loop bus一日券or兩日券】</div>
+            <div class="details">【買神戶Loop bus一日券or兩日券】 [cite: 1]</div>
         </div>
         <div class="schedule-item">
             <div class="time-loc-trans">
@@ -254,9 +258,9 @@
                 <span class="location">remm plus Kobe</span>
                 <span class="transport-tag">🚶 步行 (4min)</span>
             </div>
-            <div class="details">放行李、check-in</div>
+            <div class="details">放行李、check-in [cite: 1]</div>
             <div class="shopping-block">
-                🛍️ <strong>逛街行程：</strong><br>生田神社、三宮中心街 (Sanrio, 3coins, LABI 山田家電)
+                🛍️ <strong>逛街行程：</strong><br>生田神社、三宮中心街 (Sanrio, 3coins, LABI 山田家電) [cite: 1]
             </div>
         </div>
         <div class="schedule-item">
@@ -265,18 +269,18 @@
                 <span class="location">神戶牛燒肉 お加虎 三宮店</span>
                 <span class="transport-tag">🚶 距離飯店 8min</span>
             </div>
-            <div class="details">晚餐：燒肉時間</div>
+            <div class="details">晚餐：燒肉時間 [cite: 1]</div>
         </div>
     </div>
 
     <div class="day-section" id="day2">
-        <div class="day-header">Day 2_5/20 (三) | 奈良公園</div>
+        <div class="day-header">Day 2  5/20 (三) | 奈良公園</div>
         <div class="schedule-item">
             <div class="time-loc-trans"><span class="time">08:30</span><span class="location">飯店集合</span><span class="transport-tag">🚗 包車 (1h 10min)</span></div>
         </div>
         <div class="schedule-item">
             <div class="time-loc-trans"><span class="time">09:30</span><span class="location">東大寺、奈良公園</span></div>
-            <div class="details">奈良公園餵鹿</div>
+            <div class="details">奈良公園餵鹿 [cite: 12]</div>
         </div>
         <div class="schedule-item">
             <div class="time-loc-trans">
@@ -285,7 +289,7 @@
                 <span class="transport-tag">🚗 車程 (1h)</span>
             </div>
             <div class="shopping-block">
-                🛍️ <strong>逛街行程：</strong><br>道頓堀、心齋橋、寶可夢中心大阪店 DX
+                🛍️ <strong>逛街行程：</strong><br>道頓堀、心齋橋、寶可夢中心大阪店 DX [cite: 14]
             </div>
         </div>
         <div class="schedule-item">
@@ -294,71 +298,77 @@
     </div>
 
     <div class="day-section" id="day3">
-        <div class="day-header">Day 3_5/21 (四) | 勝尾寺與萬博</div>
+        <div class="day-header">Day 3  5/21 (四) | 勝尾寺與萬博</div>
         <div class="schedule-item">
             <div class="time-loc-trans"><span class="time">08:30</span><span class="location">飯店集合</span><span class="transport-tag">🚗 包車</span></div>
         </div>
         <div class="schedule-item">
             <div class="time-loc-trans"><span class="time">09:30</span><span class="location">勝尾寺</span></div>
-            <div class="details">達摩蓋章明信片 / 入山費：500円</div>
-        </div>
-        <div class="schedule-item">
-            <div class="time-loc-trans"><span class="time">12:00</span><span class="location">Kaikasou Minoh (蕎麥麵)</span></div>
+            <div class="details">達摩蓋章明信片 / 入山費：500円 [cite: 9]</div>
         </div>
         <div class="schedule-item">
             <div class="time-loc-trans"><span class="time">下午</span><span class="location">萬博紀念公園</span></div>
             <div class="shopping-block">
-                🛍️ <strong>逛街行程：</strong><br>LaLaport EXPOCITY 購物
+                🛍️ <strong>逛街行程：</strong><br>LaLaport EXPOCITY 購物 [cite: 17]
             </div>
         </div>
     </div>
 
     <div class="day-section" id="day4">
-        <div class="day-header">Day 4_5/22 (五) | 神戶港區</div>
+        <div class="day-header">Day 4  5/22 (五) | 神戶港區</div>
         <div class="schedule-item">
             <div class="time-loc-trans"><span class="time">10:00</span><span class="location">神戶港塔 (預約梯次)</span><span class="transport-tag">🚌 巴士/地鐵</span></div>
-            <div class="details">美利堅公園、BE KOBE、海洋博物館</div>
+            <div class="details">美利堅公園、BE KOBE、海洋博物館 [cite: 20]</div>
         </div>
         <div class="schedule-item">
             <div class="time-loc-trans"><span class="time">下午</span><span class="location">神戶臨海樂園 Mosaic</span></div>
             <div class="shopping-block">
-                🛍️ <strong>逛街行程：</strong><br>馬賽克廣場、麵包超人博物館、摩天輪
+                🛍️ <strong>逛街行程：</strong><br>馬賽克廣場、麵包超人博物館、摩天輪 [cite: 20]
             </div>
         </div>
     </div>
 
     <div class="day-section" id="day5">
-        <div class="day-header">Day 5_5/23 (六) | 北野與香草園</div>
+        <div class="day-header">Day 5  5/23 (六) | 北野與香草園</div>
         <div class="schedule-item">
             <div class="time-loc-trans"><span class="time">上午</span><span class="location">北野異人館街</span><span class="transport-tag">🚌 巴士</span></div>
-            <div class="details">星巴克異人館、六甲牧場霜淇淋</div>
+            <div class="details">星巴克異人館、六甲牧場霜淇淋 [cite: 23]</div>
         </div>
         <div class="schedule-item">
             <div class="time-loc-trans"><span class="time">下午</span><span class="location">神戶布引香草園</span><span class="transport-tag">🚠 纜車</span></div>
             <div class="shopping-block">
-                🛍️ <strong>逛街行程：</strong><br>元町商店街、舊居留地、市役所看夜景
+                🛍️ <strong>逛街行程：</strong><br>元町商店街、舊居留地、市役所看夜景 [cite: 23]
             </div>
         </div>
     </div>
 
     <div class="day-section" id="day6">
-        <div class="day-header">Day 6_5/24 (日) | 歸途</div>
+        <div class="day-header">Day 6  5/24 (日) | 回台灣</div>
         <div class="schedule-item">
-            <div class="time-loc-trans"><span class="time">09:40</span><span class="location">神戶機場</span><span class="transport-tag">🚃 Port Liner</span></div>
+            <div class="time-loc-trans">
+                <span class="time">09:40</span>
+                <span class="location">神戶機場</span>
+                <span class="transport-tag">🚃 Port Liner</span>
+            </div>
+            <div class="details">搭到第一航廈 2F [cite: 29]</div>
         </div>
         <div class="schedule-item">
-            <div class="time-loc-trans"><span class="time">11:40</span><span class="location">星宇航空起飛</span></div>
-            <div class="details">預計 13:40 抵達桃園</div>
+            <div class="time-loc-trans">
+                <span class="time">11:40</span>
+                <span class="location">星宇航空起飛</span>
+            </div>
+            <div class="details">預計 13:40 抵達桃園 [cite: 34]</div>
         </div>
     </div>
 
 </div>
 
-<a href="#top" id="backToTop">↑</a>
+<div id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+    <span style="font-size: 24px;">↑</span>
+</div>
 
 <footer>
-    &copy; 2026 神戶旅遊手冊 - 完整版
-</footer>
+    </footer>
 
 </body>
 </html>
